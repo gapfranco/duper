@@ -1,21 +1,24 @@
 # Duper
 
-**TODO: Add description**
+Implementação do aplicativo Duper, de demonstração OTP, como definido no
+capítulo 19 do livro **Progamming Elixir** do **Dave Thomas**.
 
-## Installation
+Ótimo exercício de técnicas de Supervisor e OTP e do modo Elixir de pensar um problema.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `duper` to your list of dependencies in `mix.exs`:
+## Instalação
 
-```elixir
-def deps do
-  [
-    {:duper, "~> 0.1.0"}
+- Instalar as dependências com `mix deps.get`
+- Alterar as linhas com **Duper.PathFinder** informando o diretório que deseja percorrer e
+  **Duper.Gatherer** para o numeros de qorkers simultâneos a iniciar
+
+```
+  children = [
+    Duper.Results,
+    {Duper.PathFinder, "/Users/gapfranco/projetos/modelo"},
+    Duper.WorkerSupervisor,
+    {Duper.Gatherer, 8}
   ]
-end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/duper](https://hexdocs.pm/duper).
-
+O programa percorre o diretório informado e seus subdiretórios em busca de arquivos com
+conteúdo duplicado. Ver o capítulo 19 do livor para mais detalhes.
